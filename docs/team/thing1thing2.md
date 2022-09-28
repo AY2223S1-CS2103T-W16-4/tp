@@ -21,4 +21,3 @@ Given below are my contributions to the project.
     * Added documentation for the `deleteClient` feature
   * Developer Guide:
     * Added documentation for the `deleteClient` feature.
-    

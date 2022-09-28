@@ -8,7 +8,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### Tina 
+### Tina
 
 <img src="images/thing1thing2.png" width="200px">
 
