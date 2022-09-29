@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Thing1Thing2's Project Portfolio Page
+title: Tina Agarwal's Project Portfolio Page
 ---
 
 ### Project: MyInsuRec
