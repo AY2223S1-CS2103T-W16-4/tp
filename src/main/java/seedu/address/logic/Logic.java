@@ -28,9 +28,9 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getMyInsuRec()
      */
-    ReadOnlyMyInsuRec getAddressBook();
+    ReadOnlyMyInsuRec getMyInsuRec();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of clients */
     ObservableList<Client> getFilteredClientList();
 
     /**
