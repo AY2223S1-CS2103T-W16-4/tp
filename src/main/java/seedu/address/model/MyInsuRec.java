@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.UniquePersonList;
+import seedu.address.model.client.UniqueClientList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +14,7 @@ import seedu.address.model.client.UniquePersonList;
  */
 public class MyInsuRec implements ReadOnlyMyInsuRec {
 
-    private final UniquePersonList persons;
+    private final UniqueClientList clients;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class MyInsuRec implements ReadOnlyMyInsuRec {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        clients = new UniqueClientList();
     }
 
     public MyInsuRec() {}
 
     /**
-     * Creates an MyInsuRec using the Persons in the {@code toBeCopied}
+     * Creates an MyInsuRec using the Clients in the {@code toBeCopied}
      */
     public MyInsuRec(ReadOnlyMyInsuRec toBeCopied) {
         this();
@@ -43,8 +43,8 @@ public class MyInsuRec implements ReadOnlyMyInsuRec {
      * Replaces the contents of the client list with {@code clients}.
      * {@code clients} must not contain duplicate clients.
      */
-    public void setPersons(List<Client> clients) {
-        this.persons.setPersons(clients);
+    public void setClients(List<Client> clients) {
+        this.clients.setClients(clients);
     }
 
     /**
@@ -53,7 +53,7 @@ public class MyInsuRec implements ReadOnlyMyInsuRec {
     public void resetData(ReadOnlyMyInsuRec newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getClientList());
+        setClients(newData.getClientList());
     }
 
     //// client-level operations
@@ -61,17 +61,17 @@ public class MyInsuRec implements ReadOnlyMyInsuRec {
     /**
      * Returns true if a client with the same identity as {@code client} exists in the address book.
      */
-    public boolean hasPerson(Client client) {
+    public boolean hasClient(Client client) {
         requireNonNull(client);
-        return persons.contains(client);
+        return clients.contains(client);
     }
 
     /**
      * Adds a client to the address book.
      * The client must not already exist in the address book.
      */
-    public void addPerson(Client p) {
-        persons.add(p);
+    public void addClient(Client p) {
+        clients.add(p);
     }
 
     /**
@@ -79,42 +79,42 @@ public class MyInsuRec implements ReadOnlyMyInsuRec {
      * {@code target} must exist in the address book.
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
-    public void setPerson(Client target, Client editedClient) {
+    public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
 
-        persons.setPerson(target, editedClient);
+        clients.setClient(target, editedClient);
     }
 
     /**
      * Removes {@code key} from this {@code MyInsuRec}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Client key) {
-        persons.remove(key);
+    public void removeClient(Client key) {
+        clients.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return clients.asUnmodifiableObservableList().size() + " clients";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Client> getClientList() {
-        return persons.asUnmodifiableObservableList();
+        return clients.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MyInsuRec // instanceof handles nulls
-                && persons.equals(((MyInsuRec) other).persons));
+                && clients.equals(((MyInsuRec) other).clients));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return clients.hashCode();
     }
 }

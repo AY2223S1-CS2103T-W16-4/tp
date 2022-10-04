@@ -42,12 +42,12 @@ public interface Model {
     /**
      * Sets the user prefs' MyInsuRec file path.
      */
-    void setMyInsuRecFilePath(Path addressBookFilePath);
+    void setMyInsuRecFilePath(Path myInsuRecFilePath);
 
     /**
      * Replaces MyInsuRec data with the data in {@code MyInsuRec}.
      */
-    void setMyInsuRec(ReadOnlyMyInsuRec addressBook);
+    void setMyInsuRec(ReadOnlyMyInsuRec myInsuRec);
 
     /** Returns MyInsuRec */
     ReadOnlyMyInsuRec getMyInsuRec();

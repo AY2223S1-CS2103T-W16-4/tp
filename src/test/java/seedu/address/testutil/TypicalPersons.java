@@ -65,7 +65,7 @@ public class TypicalPersons {
     public static MyInsuRec getTypicalAddressBook() {
         MyInsuRec ab = new MyInsuRec();
         for (Client client : getTypicalPersons()) {
-            ab.addPerson(client);
+            ab.addClient(client);
         }
         return ab;
     }

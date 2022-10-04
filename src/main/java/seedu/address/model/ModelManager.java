@@ -14,26 +14,26 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of MyInsuRec data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final MyInsuRec addressBook;
+    private final MyInsuRec myInsuRec;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given MyInsuRec and userPrefs.
      */
-    public ModelManager(ReadOnlyMyInsuRec addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyMyInsuRec myInsuRec, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(myInsuRec, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with MyInsuRec: " + myInsuRec + " and user prefs " + userPrefs);
 
-        this.addressBook = new MyInsuRec(addressBook);
+        this.myInsuRec = new MyInsuRec(myInsuRec);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        filteredClients = new FilteredList<>(this.myInsuRec.getClientList());
     }
 
     public ModelManager() {
@@ -66,41 +66,41 @@ public class ModelManager implements Model {
 
     @Override
     public Path getMyInsuRecFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getMyInsuRecFilePath();
     }
 
     @Override
     public void setMyInsuRecFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setMyInsuRecFilePath(addressBookFilePath);
     }
 
     //=========== MyInsuRec ================================================================================
 
     @Override
     public void setMyInsuRec(ReadOnlyMyInsuRec addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.myInsuRec.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyMyInsuRec getMyInsuRec() {
-        return addressBook;
+        return myInsuRec;
     }
 
     @Override
     public boolean hasClient(Client client) {
         requireNonNull(client);
-        return addressBook.hasPerson(client);
+        return myInsuRec.hasClient(client);
     }
 
     @Override
     public void deleteClient(Client target) {
-        addressBook.removePerson(target);
+        myInsuRec.removeClient(target);
     }
 
     @Override
     public void addClient(Client client) {
-        addressBook.addPerson(client);
+        myInsuRec.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
 
-        addressBook.setPerson(target, editedClient);
+        myInsuRec.setClient(target, editedClient);
     }
 
     //=========== Filtered Client List Accessors =============================================================
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return myInsuRec.equals(other.myInsuRec)
                 && userPrefs.equals(other.userPrefs)
                 && filteredClients.equals(other.filteredClients);
     }

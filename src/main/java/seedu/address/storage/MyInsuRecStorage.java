@@ -11,12 +11,12 @@ import seedu.address.model.ReadOnlyMyInsuRec;
 /**
  * Represents a storage for {@link MyInsuRec}.
  */
-public interface AddressBookStorage {
+public interface MyInsuRecStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getMyInsuRecFilePath();
 
     /**
      * Returns MyInsuRec data as a {@link ReadOnlyMyInsuRec}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyMyInsuRec> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyMyInsuRec> readMyInsuRec() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getMyInsuRecFilePath()
      */
-    Optional<ReadOnlyMyInsuRec> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyMyInsuRec> readMyInsuRec(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyMyInsuRec} to the storage.
-     * @param addressBook cannot be null.
+     * @param myInsuRec cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyMyInsuRec addressBook) throws IOException;
+    void saveMyInsuRec(ReadOnlyMyInsuRec myInsuRec) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyMyInsuRec)
+     * @see #saveMyInsuRec(ReadOnlyMyInsuRec)
      */
-    void saveAddressBook(ReadOnlyMyInsuRec addressBook, Path filePath) throws IOException;
+    void saveMyInsuRec(ReadOnlyMyInsuRec myInsuRec, Path filePath) throws IOException;
 
 }

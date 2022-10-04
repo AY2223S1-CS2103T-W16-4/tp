@@ -18,12 +18,8 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.*;
 import seedu.address.model.ReadOnlyMyInsuRec;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.*;
+import seedu.address.storage.MyInsuRecStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -52,7 +48,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        MyInsuRecStorage addressBookStorage = new JsonMyInsuRecStorage(userPrefs.getMyInsuRecFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -73,11 +69,11 @@ public class MainApp extends Application {
         Optional<ReadOnlyMyInsuRec> addressBookOptional;
         ReadOnlyMyInsuRec initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readMyInsuRec();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample MyInsuRec");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleMyInsuRec);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty MyInsuRec");
             initialData = new MyInsuRec();

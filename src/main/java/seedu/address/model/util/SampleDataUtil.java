@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code MyInsuRec} with sample data.
  */
 public class SampleDataUtil {
-    public static Client[] getSamplePersons() {
+    public static Client[] getSampleClients() {
         return new Client[] {
             new Client(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -40,12 +40,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyMyInsuRec getSampleAddressBook() {
-        MyInsuRec sampleAb = new MyInsuRec();
-        for (Client samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static ReadOnlyMyInsuRec getSampleMyInsuRec() {
+        MyInsuRec sampleRec = new MyInsuRec();
+        for (Client samplePerson : getSampleClients()) {
+            sampleRec.addClient(samplePerson);
         }
-        return sampleAb;
+        return sampleRec;
     }
 
     /**
