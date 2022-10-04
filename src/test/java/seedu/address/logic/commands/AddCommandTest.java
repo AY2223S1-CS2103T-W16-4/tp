@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.MyInsuRec;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMyInsuRec;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.PersonBuilder;
@@ -47,7 +47,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CLIENT, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -99,52 +99,52 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getMyInsuRecFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setMyInsuRecFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Client person) {
+        public void addClient(Client person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setMyInsuRec(ReadOnlyMyInsuRec newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyMyInsuRec getMyInsuRec() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Client person) {
+        public boolean hasClient(Client person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Client target) {
+        public void deleteClient(Client target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Client target, Client editedPerson) {
+        public void setClient(Client target, Client editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Client> getFilteredPersonList() {
+        public ObservableList<Client> getFilteredClientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Client> predicate) {
+        public void updateFilteredClientList(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Client person) {
+        public boolean hasClient(Client person) {
             requireNonNull(person);
             return this.person.isSameClient(person);
         }
@@ -174,20 +174,20 @@ public class AddCommandTest {
         final ArrayList<Client> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Client person) {
+        public boolean hasClient(Client person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSameClient);
         }
 
         @Override
-        public void addPerson(Client person) {
+        public void addClient(Client person) {
             requireNonNull(person);
             personsAdded.add(person);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyMyInsuRec getMyInsuRec() {
+            return new MyInsuRec();
         }
     }
 

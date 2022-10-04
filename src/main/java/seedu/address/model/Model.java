@@ -12,7 +12,7 @@ import seedu.address.model.client.Client;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Client> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +35,53 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' MyInsuRec file path.
      */
-    Path getAddressBookFilePath();
+    Path getMyInsuRecFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' MyInsuRec file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setMyInsuRecFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces MyInsuRec data with the data in {@code MyInsuRec}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setMyInsuRec(ReadOnlyMyInsuRec addressBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns MyInsuRec */
+    ReadOnlyMyInsuRec getMyInsuRec();
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in MyInsuRec.
      */
-    boolean hasPerson(Client client);
+    boolean hasClient(Client client);
 
     /**
      * Deletes the given client.
-     * The client must exist in the address book.
+     * The client must exist in MyInsuRec.
      */
-    void deletePerson(Client target);
+    void deleteClient(Client target);
 
     /**
      * Adds the given client.
-     * {@code client} must not already exist in the address book.
+     * {@code client} must not already exist in MyInsuRec.
      */
-    void addPerson(Client client);
+    void addClient(Client client);
 
     /**
      * Replaces the given client {@code target} with {@code editedClient}.
-     * {@code target} must exist in the address book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * {@code target} must exist in MyInsuRec.
+     * The client identity of {@code editedClient} must not be the same as another existing client in MyInsuRec.
      */
-    void setPerson(Client target, Client editedClient);
+    void setClient(Client target, Client editedClient);
 
     /** Returns an unmodifiable view of the filtered client list */
-    ObservableList<Client> getFilteredPersonList();
+    ObservableList<Client> getFilteredClientList();
 
     /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Client> predicate);
+    void updateFilteredClientList(Predicate<Client> predicate);
 }

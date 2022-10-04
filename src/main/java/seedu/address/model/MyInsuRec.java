@@ -12,7 +12,7 @@ import seedu.address.model.client.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameClient comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class MyInsuRec implements ReadOnlyMyInsuRec {
 
     private final UniquePersonList persons;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public MyInsuRec() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an MyInsuRec using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public MyInsuRec(ReadOnlyMyInsuRec toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,12 +48,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code MyInsuRec} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyMyInsuRec newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getClientList());
     }
 
     //// client-level operations
@@ -86,7 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code MyInsuRec}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Client key) {
@@ -102,15 +102,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Client> getPersonList() {
+    public ObservableList<Client> getClientList() {
         return persons.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof MyInsuRec // instanceof handles nulls
+                && persons.equals(((MyInsuRec) other).persons));
     }
 
     @Override

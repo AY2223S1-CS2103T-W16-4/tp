@@ -19,25 +19,25 @@ import seedu.address.model.client.Client;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final MyInsuRec addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyMyInsuRec addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new MyInsuRec(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredClients = new FilteredList<>(this.addressBook.getPersonList());
+        filteredClients = new FilteredList<>(this.addressBook.getClientList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new MyInsuRec(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,47 +65,47 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getMyInsuRecFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setMyInsuRecFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== MyInsuRec ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setMyInsuRec(ReadOnlyMyInsuRec addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyMyInsuRec getMyInsuRec() {
         return addressBook;
     }
 
     @Override
-    public boolean hasPerson(Client client) {
+    public boolean hasClient(Client client) {
         requireNonNull(client);
         return addressBook.hasPerson(client);
     }
 
     @Override
-    public void deletePerson(Client target) {
+    public void deleteClient(Client target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Client client) {
+    public void addClient(Client client) {
         addressBook.addPerson(client);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
     @Override
-    public void setPerson(Client target, Client editedClient) {
+    public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
 
         addressBook.setPerson(target, editedClient);
@@ -118,12 +118,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Client> getFilteredPersonList() {
+    public ObservableList<Client> getFilteredClientList() {
         return filteredClients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Client> predicate) {
+    public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
     }
