@@ -2,8 +2,10 @@ package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +22,7 @@ public class Client {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private Meeting meeting;
+    private final List<Meeting> meeting;
 
     // Data fields
     private final Address address;
@@ -36,6 +38,7 @@ public class Client {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.meeting = new ArrayList<>();
     }
 
     public Name getName() {
@@ -54,12 +57,8 @@ public class Client {
         return address;
     }
 
-    public Meeting getMeeting() {
+    public List<Meeting> getMeeting() {
         return meeting;
-    }
-
-    public void setMeeting(Meeting meeting) {
-        this.meeting = meeting;
     }
 
     /**
