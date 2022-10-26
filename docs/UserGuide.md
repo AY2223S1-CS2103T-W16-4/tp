@@ -190,7 +190,7 @@ Format: `delClient i/INDEX`
 Examples:
 * `delClient i/2`
 
-### 3.1.5 Editing a client: `editClient`
+#### 3.1.5 Editing a client: `editClient`
 
 Edits details of the specified client.
 
@@ -273,7 +273,7 @@ Format: `delMeeting i/INDEX`
 Examples:
 * `delMeeting i/2`
 
-### 3.2.5 Editing a meeting: `editMeeting`
+#### 3.2.5 Editing a meeting: `editMeeting`
 
 Edits details of the specified meeting.
 
