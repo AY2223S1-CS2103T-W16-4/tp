@@ -14,7 +14,7 @@ MyInsuRec is a **desktop app for financial advisors, optimized for use via a Com
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `MyInsuRec.jar` from [here](https://github.com/AY2223S1-CS2103T-W16-4/tp/releases).
+1. Download the latest `addressbook.jar` from [here](https://github.com/AY2223S1-CS2103T-W16-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your MyInsuRec.
 
@@ -24,9 +24,9 @@ MyInsuRec is a **desktop app for financial advisors, optimized for use via a Com
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   1. `viewClient`: View a particular client
-   2. `addClient`: Add a client
-   3. `delClient`: Delete client
+   1. [`viewClient`](#viewing-a-client-viewclient): View a particular client
+   2. [`addClient`](#adding-a-client-addclient): Add a client
+   3. [`delClient`](#deleting-a-client--delclient): Delete client
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -42,7 +42,7 @@ MyInsuRec is a **desktop app for financial advisors, optimized for use via a Com
   e.g. in `addClient n/NAME ...`, `NAME` is a parameter which can be used as `addClient n/John Tan ...`.
 
 * Items in square brackets are optional, while those not in square brackets are compulsory.<br>
-  e.g `addClient n/NAME p/PHONE_NUMBER [e/EMAIL]` can be used as `addClient i/1 p/12345678 e/John@abc.com a/123 Avenue b/12122000` or as `addClient n/John Tan p/12345678`.
+  e.g `addClient n/NAME p/PHONE_NUMBER [e/EMAIL]` can be used as `addClient n/John Tan p/12345678 e/johntan@insurec.com` or as `addClient n/John Tan p/12345678`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -68,11 +68,12 @@ Format: `help`
 
 Adds a new client to MyInsuRec.
 
-Format: `addClient n/NAME p/PHONE_NUMBER [e/EMAIL] [b/BIRTHDAY]`
+Format: `addClient n/NAME p/PHONE_NUMBER [a/ADDRESS] [e/EMAIL] [b/BIRTHDAY] [pd/PRODUCT]`
 
 * Adds a client having name `NAME`.
 * A client must have a NAME and a PHONE_NUMBER.
-* EMAIL and BIRTHDAY is optional.
+* ADDRESS, EMAIL, BIRTHDAY, and PRODUCT are optional.
+* PRODUCT should be created before adding to client.
 
 Examples:
 * `addClient n/John Tan p/0123456789 b/12122000`
@@ -110,18 +111,38 @@ Format: `delClient i/INDEX`
 Examples:
 * `delClient i/2`
 
+### Editing a client: `editClient`
+
+Edits details of the specified client.
+
+Format: `editClient i/INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [b/BIRTHDAY] [pd/PRODUCT]`
+
+* Edits the client at the specified `INDEX`.
+* At least one optional detail must be modified.
+* Maintains values of details not edited by the command.
+
+Examples:
+Suppose MyInsuRec contains only one client 'John Tan' having phone number '0123456789':
+* `editClient i/1 n/John Smith` changes the name of this client to 'John Smith'.
+* `editClient i/1 e/johntan@insurec.com`adds the email 'johntan@insurec.com' to the client.
+
 ### Adding a meeting : `addMeeting`
 
 Adds a new meeting to MyInsuRec.
-DATE should be in DD-MM-YYYY format and TIME should be in 24-hour format.
+DATE should be in DDMMYYYY format and TIME should be in 24-hour HHMM format.
 
-Format: `addMeeting i/INDEX d/DATE t/TIME dn/DESCRIPTION`
+Format: `addMeeting i/INDEX d/DATE st/START TIME et/END TIME dn/DESCRIPTION`
 
 * Adds a meeting.
-* A meeting contains the `INDEX` of the client in the clients list, the `DATE` and `TIME` for the meeting, and the `DESCRIPTION` of the meeting.
+* A meeting contains:
+* the `INDEX` of the client in the clients list that the meeting is associated with,
+* The `DATE` and `START TIME` and `END TIME` for the meeting,
+* and the `DESCRIPTION` of the meeting.
+* `START TIME` must be before `END TIME`.
+* Meeting should not conflict with timing of any other meeting already present in MyInsuRec.
 
 Examples:
-* `addMeeting i/1 d/28092022 t/1400 dn/Team meeting`
+* `addMeeting i/1 d/28092022 st/1400 et/1500 dn/Team meeting`
 
 ### Listing meetings: `listMeeting`
 
@@ -131,7 +152,7 @@ Format: `listMeeting`
 
 ### Viewing a meeting: `viewMeeting`
 
-View details associated with a meeting, such as meeting's date and time.
+View details associated with a meeting, such as meeting's date and timing.
 
 Format: `viewMeeting i/INDEX`
 
@@ -155,6 +176,21 @@ Format: `delMeeting i/INDEX`
 Examples:
 * `delMeeting i/2`
 
+### Editing a meeting: `editMeeting`
+
+Edits details of the specified meeting.
+
+Format: `editMeeting i/INDEX [d/DATE] [st/START TIME] [et/END TIME] [dn/DESCRIPTION]`
+
+* Edits the meeting at the specified `INDEX` (see [`delMeeting`](#deleting-a-meeting--delmeeting)).
+* At least one optional detail must be modified.
+* Maintains values of details not edited by the command.
+
+Examples:
+Suppose MyInsuRec contains only one meeting as created in the [`addMeeting`](#adding-a-meeting--addmeeting) command:
+* `editMeeting i/1 dn/Follow up team meeting` changes the description of this meeting.
+* `editMeeting i/1 st/1500 et/1200` will show error saying invalid time since start time is later that end time.
+
 ### Exiting MyInsuRec : `exit`
 
 Exits the program.
@@ -173,10 +209,6 @@ MyInsuRec data are saved as a JSON file `[JAR file location]/data/myinsurec.json
 If your changes to the data file makes its format invalid, MyInsuRec will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -194,14 +226,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                   |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add client**        | `addClient n/NAME p/PHONE_NUMBER [e/EMAIL]` <br> e.g., <br> • `addClient n/John Tan p/0123456789` <br> • `addClient n/John Tan p/0123456789 e/johntan@insurec.com` |
-| **List all clients**  | `listClient`                                                                                                                                                       |
-| **View client**       | `viewClient i/INDEX` <br> e.g., <br> • `viewClient i/1`                                                                                                            |
-| **Delete client**     | `delClient i/INDEX` <br> e.g., <br> • `delClient i/1`                                                                                                              |
-| **Add meeting**       | `addMeeting i/INDEX d/DATE t/TIME dn/DESCRIPTION` <br> e.g., <br> • `addMeeting i/1 d/28092022 t/1400 dn/Team meeting`                                             |
-| **List all meetings** | `listMeeting`                                                                                                                                                      |
-| **View meeting**      | `viewMeeting i/INDEX` <br> e.g., <br> • `viewMeeting i/1`                                                                                                          |
-| **Delete meeting**    | `delMeeting i/INDEX` <br> e.g., <br> • `delMeeting i/1`                                                                                                            |
-| **Exit**              | `exit`                                                                                                                                                             |
+| Action                | Format, Examples                                                                                                                                                                                         |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add client**        | `addClient n/NAME p/PHONE_NUMBER [a/ADDRESS] [e/EMAIL] [b/BIRTHDAY] [pd/PRODUCT]` <br> e.g., <br> • `addClient n/John Tan p/0123456789` <br> • `addClient n/John Tan p/0123456789 e/johntan@insurec.com` |
+| **List all clients**  | `listClient`                                                                                                                                                                                             |
+| **View client**       | `viewClient i/INDEX` <br> e.g., <br> • `viewClient i/1`                                                                                                                                                  |
+| **Delete client**     | `delClient i/INDEX` <br> e.g., <br> • `delClient i/1`                                                                                                                                                    |
+| **Edit client**       | `editClient i/INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [b/BIRTHDAY] [pd/PRODUCT]` <br> e.g., <br> • `editClient i/1 n/John Smith`                                                           |
+| **Add meeting**       | `addMeeting i/INDEX d/DATE st/START TIME et/END TIME dn/DESCRIPTION` <br> e.g., <br> • `addMeeting i/1 d/28092022 st/1400 et/1500 dn/Team meeting`                                                       |
+| **List all meetings** | `listMeeting`                                                                                                                                                                                            |
+| **View meeting**      | `viewMeeting i/INDEX` <br> e.g., <br> • `viewMeeting i/1`                                                                                                                                                |
+| **Delete meeting**    | `delMeeting i/INDEX` <br> e.g., <br> • `delMeeting i/1`                                                                                                                                                  |
+| **Edit meeting**      | `editMeeting i/INDEX [d/DATE] [st/START TIME] [et/END TIME] [dn/DESCRIPTION]` <br> e.g., <br> • `i/1 dn/Follow up team meeting`                                                                          |
+| **Exit**              | `exit`                                                                                                                                                                                                   |
