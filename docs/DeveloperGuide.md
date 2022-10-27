@@ -362,7 +362,6 @@ From then on, the `AddClientCommand` can be built as expected.
 
 <img src="images/ProposedPrefixSequenceDiagram.png" width="550" />
 
-
 #### Design considerations
 
 **Aspect: How prefixes are stored**
@@ -372,7 +371,6 @@ From then on, the `AddClientCommand` can be built as expected.
 - Case-insensitive matches can be made easily by setting a flag in the `Pattern`.
 - Cons: Regex string used to define a pattern may be difficult to read.
   e.g. `String regexForBirthday = "[b|d|birthday|birthdate][\\\\]";` is not as clear as Alternative 2
-
 - **Alternative 2:** Store each possible prefix as a `String` in a `List` maintained by `Prefix`.
 - Pros:   `String` matches are easier to read and understand than regexes
   e.g. `String[] patternsForBirthday = {"b", "d", "birthday", "birthdate"};`
@@ -382,6 +380,10 @@ From then on, the `AddClientCommand` can be built as expected.
 - A single `Pattern` for each `Prefix` is more succinct that a `List`.
 - No need to iterate through a list of Strings to find a match.
 - Matches can be made using pre-existing methods in `Matcher` (no need to rely on `String` methods)
+- Alternative Solution 2: Store each possible prefix as a String in a List maintained by Prefix.
+- Pros:   String matches are easier to understand than regexes
+e.g. String[] patternsForBirthday = {"b", "d", "birthday", "birthdate"}
+- Cons: List of String returned is cumbersome for pattern matching, i.e. Iterate through every String in patternsForBirthday to look for a match.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -532,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`
     * 3a1. System shows an error message.
 
       Use case ends.
-    
+
 
 ### Non-Functional Requirements
 
