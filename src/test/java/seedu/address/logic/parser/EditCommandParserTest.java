@@ -6,10 +6,15 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRODUCT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRODUCT_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -81,22 +86,30 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, " i/1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, " i/1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, " i/1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, " i/1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, " i/1" + INVALID_PRODUCT_DESC, Product.MESSAGE_CONSTRAINTS); // invalid product
+        assertParseFailure(parser, " i/1" + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS + INVALID_NAME_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE); // invalid name
+        assertParseFailure(parser, " i/1" + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS + INVALID_PHONE_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE); // invalid phone
+        assertParseFailure(parser, " i/1" + INVALID_EMAIL_DESC,
+                Email.MESSAGE_CONSTRAINTS + INVALID_EMAIL_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE); // invalid email
+        assertParseFailure(parser, " i/1" + INVALID_ADDRESS_DESC,
+                Address.MESSAGE_CONSTRAINTS + INVALID_ADDRESS_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE); // invalid address
+        assertParseFailure(parser, " i/1" + INVALID_PRODUCT_DESC,
+                Product.MESSAGE_CONSTRAINTS + INVALID_PRODUCT_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE); // invalid product
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, " i/1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " i/1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
+                Phone.MESSAGE_CONSTRAINTS + INVALID_PHONE_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, " i/1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " i/1" + PHONE_DESC_BOB + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS + INVALID_PHONE_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, " i/1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
-                        + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
+                        + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+                Name.MESSAGE_CONSTRAINTS + INVALID_NAME_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
     }
 
     @Test

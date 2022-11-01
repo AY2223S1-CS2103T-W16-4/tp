@@ -11,6 +11,16 @@ public class ParseException extends IllegalValueException {
         super(message);
     }
 
+    /**
+     * Constructor for parse exceptions that are caused by invalid
+     * values. Prints a message as well as the invalid value.
+     * @param message
+     * @param invalidValue
+     */
+    public ParseException(String message, String invalidValue) {
+        super(message + ".\n\"" + invalidValue + "\" is invalid!");
+    }
+
     public ParseException(String message, Throwable cause) {
         super(message, cause);
     }

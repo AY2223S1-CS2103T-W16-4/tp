@@ -64,10 +64,21 @@ public class CommandTestUtil {
     public static final String PRODUCT_DESC_PRODUCT2 = " " + PREFIX_PRODUCT + VALID_PRODUCT_2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE =
+            ".\n\"" + "James&" + "\" is invalid!";
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_PHONE_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE =
+            ".\n\"" + "911a" + "\" is invalid!";
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_EMAIL_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE =
+            ".\n\"" + "bob!yahoo" + "\" is invalid!";
+
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ADDRESS_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE =
+            ".\n\"" + "" + "\" is invalid!";
     public static final String INVALID_PRODUCT_DESC = " " + PREFIX_PRODUCT + "hubby*"; // '*' not allowed in Products
+    public static final String INVALID_PRODUCT_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE =
+            ".\n\"" + "hubby*" + "\" is invalid!";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

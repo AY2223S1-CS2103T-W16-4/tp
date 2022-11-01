@@ -6,9 +6,13 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -99,23 +103,27 @@ public class AddClientCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1, Name.MESSAGE_CONSTRAINTS);
+                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1,
+                Name.MESSAGE_CONSTRAINTS + INVALID_NAME_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1, Phone.MESSAGE_CONSTRAINTS);
+                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1,
+                Phone.MESSAGE_CONSTRAINTS + INVALID_PHONE_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1, Email.MESSAGE_CONSTRAINTS);
+                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1,
+                Email.MESSAGE_CONSTRAINTS + INVALID_EMAIL_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1, Address.MESSAGE_CONSTRAINTS);
+                + PRODUCT_DESC_PRODUCT2 + PRODUCT_DESC_PRODUCT1,
+                Address.MESSAGE_CONSTRAINTS + INVALID_ADDRESS_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+                Name.MESSAGE_CONSTRAINTS + INVALID_NAME_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

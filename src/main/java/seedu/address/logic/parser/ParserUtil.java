@@ -27,7 +27,7 @@ import seedu.address.model.product.Product;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer";
     public static final String MESSAGE_INVALID_DATE_KEYWORD =
             "The date keyword should be one of tomorrow, week, or month";
 
@@ -39,7 +39,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(MESSAGE_INVALID_INDEX, trimmedIndex);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -54,7 +54,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS, trimmedName);
         }
         return new Name(trimmedName);
     }
@@ -69,7 +69,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS, trimmedPhone);
         }
         return new Phone(trimmedPhone);
     }
@@ -84,7 +84,7 @@ public class ParserUtil {
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS, trimmedAddress);
         }
         return new Address(trimmedAddress);
     }
@@ -99,7 +99,7 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS, trimmedEmail);
         }
         return new Email(trimmedEmail);
     }
@@ -113,9 +113,9 @@ public class ParserUtil {
             return LocalDate.parse(date, DateTimeFormatter.ofPattern("ddMMyyyy"));
         } catch (DateTimeParseException e) {
             if (type.equals("meeting")) {
-                throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS);
+                throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS, date);
             } else {
-                throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Birthday.MESSAGE_CONSTRAINTS, date);
             }
         }
     }
@@ -135,7 +135,7 @@ public class ParserUtil {
         case "month":
             return DateKeyword.THIS_MONTH;
         default:
-            throw new ParseException(MESSAGE_INVALID_DATE_KEYWORD);
+            throw new ParseException(MESSAGE_INVALID_DATE_KEYWORD, dateKeyword);
         }
     }
 
@@ -149,7 +149,7 @@ public class ParserUtil {
             LocalTime parsedTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
             return new MeetingTime(parsedTime);
         } catch (DateTimeParseException e) {
-            throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS, time);
         }
     }
 
@@ -163,7 +163,7 @@ public class ParserUtil {
         requireNonNull(product);
         String trimmedProduct = product.trim();
         if (!Product.isValidProductName(trimmedProduct)) {
-            throw new ParseException(Product.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Product.MESSAGE_CONSTRAINTS, product);
         }
         return new Product(trimmedProduct);
     }

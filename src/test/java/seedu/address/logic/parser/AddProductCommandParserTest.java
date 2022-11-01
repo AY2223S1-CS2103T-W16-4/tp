@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRODUCT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRODUCT_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PRODUCT_DESC_PRODUCT1;
@@ -45,7 +46,7 @@ public class AddProductCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid product name
         assertParseFailure(parser, INVALID_PRODUCT_DESC,
-                Product.MESSAGE_CONSTRAINTS);
+                Product.MESSAGE_CONSTRAINTS + INVALID_PRODUCT_DESC_EXPECTED_PARSE_EXCEPTION_MESSAGE);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + PRODUCT_DESC_PRODUCT1,
