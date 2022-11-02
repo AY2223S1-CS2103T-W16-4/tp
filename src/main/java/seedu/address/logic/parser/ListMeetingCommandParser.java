@@ -14,7 +14,8 @@ public class ListMeetingCommandParser implements Parser<ListMeetingCommand> {
     @Override
     public ListMeetingCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
-        if (!ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_DATE)) {
+        boolean isDateKeywordPresent = ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_DATE);
+        if (!isDateKeywordPresent) {
             return new ListMeetingCommand(DateKeyword.ALL_TIME);
         }
 

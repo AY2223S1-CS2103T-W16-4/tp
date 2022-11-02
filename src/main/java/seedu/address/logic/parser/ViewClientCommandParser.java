@@ -20,9 +20,9 @@ public class ViewClientCommandParser implements Parser<ViewClientCommand> {
     public ViewClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
+        boolean areRequiredPrefixesPresent = ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX);
 
-        if (!ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX)
-                || !argumentMultimap.getPreamble().isEmpty()) {
+        if (!areRequiredPrefixesPresent || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
         }
 

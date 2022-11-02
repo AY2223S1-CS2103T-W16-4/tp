@@ -18,7 +18,8 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
      */
     public DeleteMeetingCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
-        if (!ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX)) {
+        boolean areRequiredPrefixesPresent = ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX);
+        if (!areRequiredPrefixesPresent) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
         }
 

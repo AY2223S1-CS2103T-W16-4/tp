@@ -18,7 +18,8 @@ public class DeleteProductCommandParser implements Parser<DeleteProductCommand> 
      */
     public DeleteProductCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
-        if (!ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX)) {
+        boolean areRequiredPrefixesPresent = ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX);
+        if (!areRequiredPrefixesPresent) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteProductCommand.MESSAGE_USAGE));
         }
 
