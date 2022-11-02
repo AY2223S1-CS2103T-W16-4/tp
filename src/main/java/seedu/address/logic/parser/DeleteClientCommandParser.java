@@ -21,7 +21,7 @@ public class DeleteClientCommandParser implements Parser<DeleteClientCommand> {
     public DeleteClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
-        boolean areRequiredPrefixesPresent =ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX);
+        boolean areRequiredPrefixesPresent = ParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_INDEX);
         if (!areRequiredPrefixesPresent) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClientCommand.MESSAGE_USAGE));
         }
