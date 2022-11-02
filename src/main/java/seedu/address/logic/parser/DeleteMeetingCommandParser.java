@@ -23,6 +23,7 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMeetingCommand.MESSAGE_USAGE));
         }
 
+        // get value of index
         try {
             Index index = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_INDEX).get());
             return new DeleteMeetingCommand(index);

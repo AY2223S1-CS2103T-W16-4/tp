@@ -40,6 +40,7 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_BIRTHDAY, PREFIX_PRODUCT);
 
+        // get all values
         Index index;
 
         try {

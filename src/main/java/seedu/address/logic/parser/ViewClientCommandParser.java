@@ -26,6 +26,7 @@ public class ViewClientCommandParser implements Parser<ViewClientCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
         }
 
+        // get value of index
         Index index = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_INDEX).get());
         return new ViewClientCommand(index);
     }

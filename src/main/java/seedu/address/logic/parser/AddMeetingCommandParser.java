@@ -32,6 +32,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
         }
 
+        // get all values
         Index clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         MeetingDate date = new MeetingDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get(), "meeting"));
         MeetingTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());

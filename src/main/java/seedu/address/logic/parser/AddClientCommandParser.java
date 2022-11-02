@@ -42,6 +42,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
         }
 
+        // get all values
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Optional<Email> email = argMultimap.getValue(PREFIX_EMAIL).isPresent()
@@ -55,6 +56,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
                         argMultimap.getValue(PREFIX_BIRTHDAY).get(), "birthday")))
                 : Optional.empty();
         Set<Product> products = ParserUtil.parseProducts(argMultimap.getAllValues(PREFIX_PRODUCT));
+
         Client client = new Client(name, phone, email, address, birthday, products);
         return new AddClientCommand(client);
     }

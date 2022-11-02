@@ -27,6 +27,7 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddProductCommand.MESSAGE_USAGE));
         }
 
+        // get value
         Product product = ParserUtil.parseProduct(argMultimap.getValue(PREFIX_PRODUCT).get());
         return new AddProductCommand(product);
     }

@@ -35,6 +35,7 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME,
                         PREFIX_DESCRIPTION);
 
+        // get all values
         Index index;
 
         try {
