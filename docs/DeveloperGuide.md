@@ -160,7 +160,7 @@ The `Storage` component,
 
 ### 2.6 Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `seedu.myinsurec.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
